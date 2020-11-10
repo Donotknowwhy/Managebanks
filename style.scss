@@ -1,0 +1,19 @@
+$backgroundColor: #FFF;
+
+.app {
+  background-color: $backgroundColor;
+}
+.firebaseui-container {
+  max-width: inherit !important;
+}
+.firebaseui-card-content {
+  padding: 0 !important;
+}
+.firebaseui-idp-button {
+  width: 100% !important;
+  max-width: inherit !important;
+}
+
+.ant-popover-inner-content{
+  padding: 0px !important;
+}
