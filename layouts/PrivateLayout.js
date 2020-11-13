@@ -28,7 +28,6 @@ function PrivateLayout(props) {
   return (
     <>
       <Layout >
-        <Space size={50} direction="vertical">
           <Affix>
             <Header className={styles.formHeader}>
               <Navigation />
@@ -37,7 +36,6 @@ function PrivateLayout(props) {
           <Layout>
             {props.children}
           </Layout>
-        </Space>
         <Footer style={{textAlign: 'center'}}>
           Design by 105C7
         </Footer>
