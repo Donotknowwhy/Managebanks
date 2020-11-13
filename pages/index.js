@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import styles from './index.module.scss';
 import PrivateLayout from '../layouts/PrivateLayout';
 import { Layout, Menu, Breadcrumb,Space } from 'antd';
 import SideBar from "../components/SideBar"
@@ -12,12 +12,10 @@ export default function Home() {
   return (
     <PrivateLayout>
     {/* <div className={styles.container}> */}
-    <Space size={40} align="start" >
         <SideBar />
-        <Content >
+        <Content className={styles.content}  >
           <Index />
         </Content>
-      </Space>
     {/* </div> */}
     </PrivateLayout>
   )
