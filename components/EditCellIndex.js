@@ -68,16 +68,16 @@ const EditableCell = ({
         <Input ref={inputRef} onPressEnter={save} onBlur={save} />
       </Form.Item>
     ) : (
-      <div
-        className={styles.editable-cell-value-wrap}
-        style={{
-          paddingRight: 24,
-        }}
-        onClick={toggleEdit}
-      >
-        {children}
-      </div>
-    );
+        <div
+          className={styles.editable - cell - value - wrap}
+          style={{
+            paddingRight: 24,
+          }}
+          onClick={toggleEdit}
+        >
+          {children}
+        </div>
+      );
   }
 
   return <td {...restProps}>{childNode}</td>;
@@ -86,147 +86,104 @@ const EditableCell = ({
 export default function EditCell() {
   const [dataSource, setDataSource] = useState([
     {
-      key: '0',
+      key: 0,
       name: 'Edward King 0',
-      age: '32',
+      age: 32,
       address: 'London, Park Lane no. 0',
     },
     {
-      key: '1',
+      key: 1,
       name: 'Edward King 1',
-      age: '32',
+      age: 32,
       address: 'London, Park Lane no. 1',
     },
   ]);
-  const [count,setCount] = useState(2);
-  
-    // const columns = [
-    //   {
-    //     title: 'name',
-    //     dataIndex: 'name',
-    //     width: '30%',
-    //     editable: true,
-    //   },
-    //   {
-    //     title: 'age',
-    //     dataIndex: 'age',
-    //   },
-    //   {
-    //     title: 'address',
-    //     dataIndex: 'address',
-    //   },
-    //   {
-    //     title: 'operation',
-    //     dataIndex: 'operation',
-    //     render: (text, record) =>
-    //       dataSource.length >= 1 ? (
-    //         <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.key)}>
-    //           <a>Delete</a>
-    //         </Popconfirm>
-    //       ) : null,
-    //   },
-    // ];
+  const [count, setCount] = useState(2);
 
-    const [columns, setColumns] = useState([{
-        title: 'name',
-        dataIndex: 'name',
-        width: '30%',
-        editable: true,
-      },
-      {
-        title: 'age',
-        dataIndex: 'age',
-      },
-      {
-        title: 'address',
-        dataIndex: 'address',
-      },
-      {
-        title: 'operation',
-        dataIndex: 'operation',
-        render: (text, record) =>
-          dataSource.length >= 1 ? (
-            <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.key)}>
-              <a>Delete</a>
-            </Popconfirm>
-          ) : null,
-      },])
+  const [columns, setColumns] = useState([{
+    title: 'name',
+    dataIndex: 'name',
+    width: '30%',
+    editable: true,
+  },
+  {
+    title: 'age',
+    dataIndex: 'age',
+  },
+  {
+    title: 'address',
+    dataIndex: 'address',
+  },
+  {
+    title: 'operation',
+    dataIndex: 'operation',
+    render: (text, record) =>
+      dataSource.length >= 1 ? (
+        <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.key)}>
+          <a>Delete</a>
+        </Popconfirm>
+      ) : null,
+  },])
 
 
-   const handleDelete = (key) => {
+  const handleDelete = (key) => {
+    console.log('data socuer trước', dataSource);
     // const newDataSource = [...dataSource];
     // const index = newDataSource.filter((item) => item.key !== key);
     // setDataSource(index)
+    // console.log('data socuer sau', dataSource);
 
-    const newData = [...dataSource];
-    const index = newData.findIndex((item) => item.key !== item.key);
-    const item = newData[index];
-    // newData.splice(index, 1, { ...item, ...row });
-    setDataSource(newData);
+    // console.log('key', key);
+    // console.log('newData', newDataSource);
+    // console.log('index', index);
   };
 
-   const handleAdd = () => {
+  const handleAdd = () => {
     const newData = {
       key: count,
       name: `Edward King ${count}`,
       age: 32,
       address: `London, Park Lane no. ${count}`,
     };
+
     setDataSource([...dataSource, newData]);
+    console.log('add dataSoucer',dataSource);
     setCount(count + 1);
   };
 
 
-    const handleSave = (row) => {
-      const newData = [...dataSource];
-      const index = newData.findIndex((item) => row.key === item.key);
-      const item = newData[index];
-      newData.splice(index, 1, { ...item, ...row });
-      setDataSource(newData);
+  const handleSave = (row) => {
+    const newData = [...dataSource];
+    const index = newData.findIndex((item) => row.key === item.key);
+    const item = newData[index];
+    newData.splice(index, 1, { ...item, ...row });
+    setDataSource(newData);
   };
 
-  
-    const components = {
-      body: {
-        row: EditableRow,
-        cell: EditableCell,
-      },
-    };
-
-    // setColumns([columns.map((col) => {
-    //   if (!col.editable) {
-    //     return col;
-    //   }
-    //   return {
-    //     ...col,
-    //     onCell: (record) => ({
-    //       record,
-    //       editable: col.editable,
-    //       dataIndex: col.dataIndex,
-    //       title: col.title,
-    //       handleSave: handleSave,
-    //     }),
-    //   };
-    // })]) 
-
-    return (
-      <div>
-        <Button
-          onClick={handleAdd}
-          type="primary"
-          style={{
-            marginBottom: 16,
-          }}
-        >
-          Add a row
+  const components = {
+    body: {
+      row: EditableRow,
+      cell: EditableCell,
+    },
+  };
+  return (
+    <div>
+      <Button
+        onClick={handleAdd}
+        type="primary"
+        style={{
+          marginBottom: 16,
+        }}
+      >
+        Add a row
         </Button>
-        <Table
-          components={components}
-          rowClassName={() => 'editable-row'}
-          bordered
-          dataSource={dataSource}
-          columns={columns}
-        />
-      </div>
-    );
+      <Table
+        components={components}
+        rowClassName={() => 'editable-row'}
+        bordered
+        dataSource={dataSource}
+        columns={columns}
+      />
+    </div>
+  );
 }
