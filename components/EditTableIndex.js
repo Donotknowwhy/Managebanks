@@ -49,6 +49,7 @@ const EditableCell = ({
 export default function EditableTable() {
   const [form] = Form.useForm();
   const [data, setData] = useState(originData);
+
   const [editingKey, setEditingKey] = useState('');
 
   const isEditing = (record) => record.key === editingKey;
@@ -163,9 +164,9 @@ export default function EditableTable() {
         dataSource={data}
         columns={mergedColumns}
         rowClassName="editable-row"
-        pagination={{
-          onChange: cancel,
-        }}
+        // pagination={{
+        //   onChange: cancel,
+        // }}
       />
     </Form>
   );

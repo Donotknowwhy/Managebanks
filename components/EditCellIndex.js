@@ -158,11 +158,13 @@ export default function EditCell() {
     // const index = newDataSource.filter((item) => item.key !== key);
     // setDataSource(index)
 
-    const newData = [...dataSource];
-    const index = newData.findIndex((item) => item.key !== item.key);
-    const item = newData[index];
+    const dataSource = [...dataSource];
+    console.log(dataSource)
+    const index = dataSource.filter((item) => item.key !== key);
+    // console.log(index)
+    // console.log(key)
     // newData.splice(index, 1, { ...item, ...row });
-    setDataSource(newData);
+    setDataSource(index);
   };
 
    const handleAdd = () => {
@@ -193,21 +195,23 @@ export default function EditCell() {
       },
     };
 
-    // setColumns([columns.map((col) => {
-    //   if (!col.editable) {
-    //     return col;
-    //   }
-    //   return {
-    //     ...col,
-    //     onCell: (record) => ({
-    //       record,
-    //       editable: col.editable,
-    //       dataIndex: col.dataIndex,
-    //       title: col.title,
-    //       handleSave: handleSave,
-    //     }),
-    //   };
-    // })]) 
+    // useEffect(() =>{
+    //   setColumns([columns.map((col) => {
+    //     if (!col.editable) {
+    //       return col;
+    //     }
+    //     return {
+    //       ...col,
+    //       onCell: (record) => ({
+    //         record,
+    //         editable: col.editable,
+    //         dataIndex: col.dataIndex,
+    //         title: col.title,
+    //         handleSave: handleSave,
+    //       }),
+    //     };
+    //   })]) 
+    // })
 
     return (
       <div>
