@@ -7,7 +7,10 @@ const { Header, Content, Footer, Sider } = Layout;
 export default function SiderBar() {
     return (
       <Affix offsetTop={65}>
-        <Sider className="site-layout-background" width={200}>
+        <Sider 
+        breakpoint="sm"
+        collapsedWidth="0"
+          className="site-layout-background" width={250}>
           <Menu
             mode="inline"
             defaultSelectedKeys={['1']}

@@ -119,7 +119,10 @@ export default function EditCell() {
     dataIndex: 'operation',
     render: (text, record) =>
       dataSource.length >= 1 ? (
-        <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.key)}>
+        <Popconfirm title="Sure to delete?" onConfirm={() => {
+          // console.log('data o day',dataSource);
+          handleDelete(record.key)
+        }}>
           <a>Delete</a>
         </Popconfirm>
       ) : null,
@@ -128,6 +131,8 @@ export default function EditCell() {
 
   const handleDelete = (key) => {
     console.log('data socuer trước', dataSource);
+    const dataSource2 = [...dataSource];
+    console.log('count', dataSource2);
     // const newDataSource = [...dataSource];
     // const index = newDataSource.filter((item) => item.key !== key);
     // setDataSource(index)
@@ -148,6 +153,7 @@ export default function EditCell() {
 
     setDataSource([...dataSource, newData]);
     console.log('add dataSoucer',dataSource);
+    console.log('count add', count);
     setCount(count + 1);
   };
 
@@ -160,22 +166,42 @@ export default function EditCell() {
     setDataSource(newData);
   };
 
-  const components = {
-    body: {
-      row: EditableRow,
-      cell: EditableCell,
-    },
-  };
-  return (
-    <div>
-      <Button
-        onClick={handleAdd}
-        type="primary"
-        style={{
-          marginBottom: 16,
-        }}
-      >
-        Add a row
+  
+    const components = {
+      body: {
+        row: EditableRow,
+        cell: EditableCell,
+      },
+    };
+
+    // useEffect(() =>{
+    //   setColumns([columns.map((col) => {
+    //     if (!col.editable) {
+    //       return col;
+    //     }
+    //     return {
+    //       ...col,
+    //       onCell: (record) => ({
+    //         record,
+    //         editable: col.editable,
+    //         dataIndex: col.dataIndex,
+    //         title: col.title,
+    //         handleSave: handleSave,
+    //       }),
+    //     };
+    //   })]) 
+    // })
+
+    return (
+      <div>
+        <Button
+          onClick={handleAdd}
+          type="primary"
+          style={{
+            marginBottom: 16,
+          }}
+        >
+          Add a row
         </Button>
       <Table
         components={components}
