@@ -16,6 +16,13 @@ export default function Navigation() {
   const {Search} = Input;
   const {user, logout} = useUser();
 
+  const menu = (
+    <Menu>
+      <Menu.Item key="3">
+        <a onClick={() => logout()}>Đăng xuất</a>
+      </Menu.Item>
+    </Menu>
+  );
 
   return (
     <>
@@ -37,10 +44,12 @@ export default function Navigation() {
         <Col xs={10} sm={7} md={5} lg={5} >
           <Row justify="end">
             <Col xs={8} sm={7} lg={7} xl={6}>
+            <Dropdown overlay={menu} trigger={['click']}>
                 <Space>
-                  <Avatar size={40} src={user ? user.photoURL : ''} />
+                  <Avatar size={40} src={user ? user.photoURL : ''} className={styles.avatarNavbar}/>
                   <DownOutlined />
                 </Space>
+              </Dropdown>
             </Col>
           </Row>
         </Col>
