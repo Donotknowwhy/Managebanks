@@ -14,15 +14,13 @@ const { Header, Content, Sider } = Layout;
 export default function Home() {
   return (
     <PrivateLayout>
-    {/* <div className={styles.container}> */}
-        <SideBar />
+        {/* <SideBar /> */}
         <Content className={styles.content}  >
           <Index />
-          <SearchIndex />
-          <EditCell />
+          {/* <SearchIndex /> */}
+          {/* <EditCell /> */}
           <EdiTable/>
         </Content>
-    {/* </div> */}
     </PrivateLayout>
   )
 }
