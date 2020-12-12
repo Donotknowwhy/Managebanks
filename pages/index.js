@@ -4,9 +4,7 @@ import PrivateLayout from '../layouts/PrivateLayout';
 import { Layout, Menu, Breadcrumb,Space } from 'antd';
 import SideBar from "../components/SideBar"
 import Index from '../components/index'
-import SearchIndex from '../components/SearchIndex'
-import EditCell from '../components/EditCellIndex'
-import EdiTable from '../components/EditTableIndex'
+import SearchIndex from '../components/Employee'
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 
 const { SubMenu } = Menu;
@@ -17,9 +15,6 @@ export default function Home() {
         {/* <SideBar /> */}
         <Content className={styles.content}  >
           <Index />
-          {/* <SearchIndex /> */}
-          {/* <EditCell /> */}
-          <EdiTable/>
         </Content>
     </PrivateLayout>
   )

@@ -1,53 +1,28 @@
-import { Row, Col, Table, Button, Space, Input, Card } from 'antd';
+import { Row, Col, Table, Button, Space, Input, Card, Tabs } from 'antd';
 import { useState, useEffect } from 'react';
 import styles from './Index.module.scss';
 import reqwest from 'reqwest';
 import {getUser} from '../api/user';
-
+import Employee from './Employee'
+import Customer from './Customer'
 const { Search } = Input;
-
+const { TabPane } = Tabs;
 export default function PostComponent() {
 
   return (
     <>
-      <div >
-        <Row gutter={16}>
-          <Col xs={24} sm={24} lg={12} xl={6}>
-            <Card  bordered={false} className={styles.card}>
-              <h2>2064</h2>
-              <h4>Sessions</h4>
-            </Card>
-          </Col>
-          <Col xs={24} sm={24} lg={12} xl={6}>
-            <Card  bordered={false} className={styles.card}>
-              <h2>2064</h2>
-              <h4>Sessions</h4>
-            </Card>
-          </Col>
-          <Col xs={24} sm={24} lg={12} xl={6}>
-            <Card  bordered={false} className={styles.card}>
-              <h2>2064</h2>
-              <h4>Sessions</h4>
-            </Card>
-          </Col>
-          <Col xs={24} sm={24} lg={12} xl={6}>
-            <Card  bordered={false} className={styles.card}>
-              <h2>2064</h2>
-              <h4>Sessions</h4>
-            </Card>
-          </Col>
-        </Row>
-      </div>
+      <Tabs  type="card">
+      <TabPane tab="Nhân Viên" key="1">
+        <Employee/>
+      </TabPane>
+      <TabPane tab="Khách hàng" key="2">
+        <Customer/>
+      </TabPane>
+      <TabPane tab="Tab 3" key="3">
+        Content of Tab Pane 3
+      </TabPane>
+    </Tabs>
       <br />
-      {/* <Row justify='center'>
-        <Search
-        placeholder="input search text"
-        allowClear
-        enterButton="Search"
-        size="large"
-        style={{'width' : '1000px'}}
-        />
-      </Row> */}
       <br />
     </>
   )

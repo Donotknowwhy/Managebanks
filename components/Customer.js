@@ -1,9 +1,8 @@
-import { Table, Input, Button, Space, InputNumber, Popconfirm, Form } from 'antd';
+import { Table, Input, Button, Space, InputNumber, Popconfirm, Form ,Tabs} from 'antd';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
 import { useState, useEffect } from 'react';
 import reqwest from 'reqwest';
-
 
 const EditableCell = ({
   editing,
@@ -40,7 +39,7 @@ const EditableCell = ({
   );
 };
 
-export default function SearchIndex() {
+export default function Customer() {
   // search table
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
@@ -105,73 +104,70 @@ export default function SearchIndex() {
   };
 
   const [data,setData] = useState([]);
-    const [pagination,setPagination] = useState({
-      current : 1,
-      pageSize: 10,
-    });
-    const [loading, setLoading] = useState(false);
+  const [pagination,setPagination] = useState({
+    current : 1,
+    pageSize: 20,
+  });
+  const [loading, setLoading] = useState(false);
   
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
-      sorter: true,
-      width: '20%',
-      editable: true,
-      ...getColumnSearchProps('name'),
+      title: 'ID',
+      dataIndex: 'id',
+      width: '5%',
+      // editable: true,
+      // ...getColumnSearchProps('gender'),
     },
+
     {
-      title: 'Gender',
-      dataIndex: 'gender',
-      filters: [
-        { text: 'Male', value: 'male' },
-        { text: 'Female', value: 'female' },
-      ],
+      title: 'Card Number',
+      dataIndex: 'idCustomer',
       width: '20%',
-      editable: true,
-      ...getColumnSearchProps('gender'),
+      // editable: true,
+      // ...getColumnSearchProps('gender'),
     },
     {
       title: 'Email',
-      dataIndex: 'email',
+      dataIndex: 'person',
       width: '20%',
-      editable: true,
-      ...getColumnSearchProps('email'),
+      render: person => `${person.email} `,
+      // editable: true,
+      // ...getColumnSearchProps('email'),
     },
     {
-      title: 'Phone',
-      dataIndex: 'phone',
+      title: 'Name',
+      dataIndex: 'person',
       width: '20%',
-      editable: true,
-      ...getColumnSearchProps('phone'),
+      render: person => `${person.fullName.ho} ${person.fullName.tenDem} ${person.fullName.ten}`,
+      
     },
-    {
-      title: 'operation',
-      dataIndex: 'operation',
-      render: (_, record) => {
-        const editable = isEditing(record);
-        return editable ? (
-          <span>
-            <a
-              href="javascript:;"
-              onClick={() => save(record.key)}
-              style={{
-                marginRight: 8,
-              }}
-            >
-              Save
-            </a>
-            <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-              <a>Cancel</a>
-            </Popconfirm>
-          </span>
-        ) : (
-          <a disabled={editingKey !== ''} onClick={() => edit(record)}>
-            Edit
-          </a>
-        );
-      },
-    },
+    // {
+    //   title: 'operation',
+    //   dataIndex: 'operation',
+    //   render: (_, record) => {
+    //     const editable = isEditing(record);
+    //     return editable ? (
+    //       <span>
+    //         <a
+    //           href="javascript:;"
+    //           onClick={() => save(record.key)}
+    //           style={{
+    //             marginRight: 8,
+    //           }}
+    //         >
+    //           Save
+    //         </a>
+    //         <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
+    //           <a>Cancel</a>
+    //         </Popconfirm>
+    //       </span>
+    //     ) : (
+    //       <a disabled={editingKey !== ''} onClick={() => edit(record)}>
+    //         Edit
+    //       </a>
+    //     );
+    //   },
+    // },
   ];
 
   const getRandomuserParams = params => {
@@ -199,17 +195,20 @@ export default function SearchIndex() {
 
   const fetch = (params = {}) => {
     setLoading(true);
+    for (let i = 1; i <= 4; i++) {
     reqwest({
-      url: 'https://randomuser.me/api',
+      url: `http://localhost:3000/customer?page= ${i}`,
       method: 'get',
       type: 'json',
       data: getRandomuserParams(params),
     }).then(data => {
       console.log(data);
       setLoading(false);
-      setData(data.results);
+      setData(data);
       setPagination({...params.pagination, total: 200,});
     });
+    
+  }
   };
 
 
@@ -273,6 +272,7 @@ export default function SearchIndex() {
   });
 
     return (
+      <>
       <Form form={form} component={false}>
         <Table
         components={{
@@ -284,12 +284,12 @@ export default function SearchIndex() {
           rowClassName="editable-row"
           bordered
           dataSource={data}
-          rowKey={record => record.login.uuid}
           pagination={pagination}
           loading={loading}
           onChange={handleTableChange}
           size='middle'
           />
         </Form>
+        </>
     )
   }
