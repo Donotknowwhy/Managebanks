@@ -6,6 +6,8 @@ import {
 } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
+import {openNotification} from './CustomerMini'
+import {getListCustomer} from '../api/customer'
 const originData = [];
 const { confirm } = Modal;
 
@@ -54,22 +56,24 @@ const EditableCell = ({
   );
 };
 
-export default function EditableTable() {
+export default function Customer() {
   const [form] = Form.useForm();
   const [data, setData] = useState(originData);
   const [editingKey, setEditingKey] = useState('');
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
   const [searchInput, setSearchInput] = useState();
+  const [count, setCount] = useState(101);
   const isEditing = (record) => record.key === editingKey;
 
-
-  const openNotification = (placement) => {
-    notification.success({
-      message: `Bạn đã xóa bài viết thành công`,
-      placement,
-    });
-  };
+  useEffect( ()=>{
+    getListCustomer( {page:1})
+    .then( (res) =>{
+      console.log("chao anh em..",res.data[0]);
+    }
+    // console.log("chao anh em");
+  )
+  })
   const showPromiseConfirm = async (record) => {
     confirm({
       title: 'Xóa bài viết?',
@@ -83,62 +87,62 @@ export default function EditableTable() {
     });
   };
 
-  const getColumnSearchProps = dataIndex => ({
-    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-      <div style={{ padding: 8 }}>
-        <Input
-          ref={node => {
-            setSearchInput(node);
-          }}
-          placeholder={`Search ${dataIndex}`}
-          value={selectedKeys[0]}
-          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-          onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-          style={{ width: 188, marginBottom: 8, display: 'block' }}
-        />
-        <Space>
-          <Button
-            type="primary"
-            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-            icon={<SearchOutlined />}
-            size="small"
-            style={{ width: 90 }}
-          >
-            Search
-          </Button>
-          <Button onClick={() => handleReset(clearFilters)} size="small" style={{ width: 90 }}>
-            Reset
-          </Button>
-        </Space>
-      </div>
-    ),
-    filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-    onFilter: (value, record) =>
-      record[dataIndex]
-        ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
-        : '',
-    render: text =>
-      searchedColumn === dataIndex ? (
-        <Highlighter
-          highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
-          searchWords={[searchText]}
-          autoEscape
-          textToHighlight={text ? text.toString() : ''}
-        />
-      ) : (
-          text
-        ),
-  });
-  const handleSearch = (selectedKeys, confirm, dataIndex) => {
-    confirm();
-    setSearchText(selectedKeys[0]);
-    setSearchedColumn(dataIndex);
-  };
+  // const getColumnSearchProps = dataIndex => ({
+  //   filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+  //     <div style={{ padding: 8 }}>
+  //       <Input
+  //         ref={node => {
+  //           setSearchInput(node);
+  //         }}
+  //         placeholder={`Search ${dataIndex}`}
+  //         value={selectedKeys[0]}
+  //         onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+  //         onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+  //         style={{ width: 188, marginBottom: 8, display: 'block' }}
+  //       />
+  //       <Space>
+  //         <Button
+  //           type="primary"
+  //           onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+  //           icon={<SearchOutlined />}
+  //           size="small"
+  //           style={{ width: 90 }}
+  //         >
+  //           Search
+  //         </Button>
+  //         <Button onClick={() => handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+  //           Reset
+  //         </Button>
+  //       </Space>
+  //     </div>
+  //   ),
+  //   filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+  //   onFilter: (value, record) =>
+  //     record[dataIndex]
+  //       ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
+  //       : '',
+  //   render: text =>
+  //     searchedColumn === dataIndex ? (
+  //       <Highlighter
+  //         highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+  //         searchWords={[searchText]}
+  //         autoEscape
+  //         textToHighlight={text ? text.toString() : ''}
+  //       />
+  //     ) : (
+  //         text
+  //       ),
+  // });
+  // const handleSearch = (selectedKeys, confirm, dataIndex) => {
+  //   confirm();
+  //   setSearchText(selectedKeys[0]);
+  //   setSearchedColumn(dataIndex);
+  // };
 
-  const handleReset = clearFilters => {
-    clearFilters();
-    setSearchText('');
-  };
+  // const handleReset = clearFilters => {
+  //   clearFilters();
+  //   setSearchText('');
+  // };
 
   const edit = (record) => {
     form.setFieldsValue({
@@ -182,6 +186,19 @@ export default function EditableTable() {
       console.log('Validate Failed:', errInfo);
     }
   };
+  const handleAdd = () => {
+    const newData = {
+      key: count,
+      idCard: `00109901840${count}`,
+      idCustomer: `11213${count}`,
+      name: `Edrward ${count}`,
+      dateOfBirth: new Date(2018, 11, 24, 10, 33, 30, 0),
+      address: `London Park no. ${count}`,
+    };
+
+    originData.unshift(newData)
+    console.log('data sau',originData);
+  };
 
   const columns = [
     {
@@ -189,35 +206,35 @@ export default function EditableTable() {
       dataIndex: 'idCard',
       width: '20%',
       editable: true,
-      ...getColumnSearchProps('idCard'),
+      // ...getColumnSearchProps('idCard'),
     },
     {
       title: 'Mã số khách hàng',
       dataIndex: 'idCustomer',
       width: '25%',
       editable: true,
-      ...getColumnSearchProps('idCustomer'),
+      // ...getColumnSearchProps('idCustomer'),
     },
     {
       title: 'tên',
       dataIndex: 'name',
       width: '10%',
       editable: true,
-      ...getColumnSearchProps('name'),
+      // ...getColumnSearchProps('name'),
     },
     {
       title: 'ngày sinh',
       dataIndex: 'dateOfBirth',
       width: '10%',
       editable: true,
-      ...getColumnSearchProps('dateOfBirth'),
+      // ...getColumnSearchProps('dateOfBirth'),
     },
     {
       title: 'Địa chỉ',
       dataIndex: 'address',
       width: '20%',
       editable: true,
-      ...getColumnSearchProps('address'),
+      // ...getColumnSearchProps('address'),
     },
     {
       title: 'operation',
@@ -273,6 +290,15 @@ export default function EditableTable() {
   });
   return (
     <Form form={form} component={false}>
+       <Button
+          onClick={handleAdd}
+          type="primary"
+          style={{
+            marginBottom: 16,
+          }}
+        >
+          Add a row
+        </Button>
       <Table
         components={{
           body: {
