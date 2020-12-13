@@ -5,7 +5,7 @@ import { Layout, Menu, Breadcrumb,Space } from 'antd';
 import SideBar from "../components/SideBar"
 import Index from '../components/index'
 import SearchIndex from '../components/SearchIndex'
-import Customer from '../components/Customer'
+import Customer from '../components/Customer/Customer'
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 
 const { SubMenu } = Menu;

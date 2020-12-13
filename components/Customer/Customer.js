@@ -4,24 +4,25 @@ import {
   Popconfirm, Form, Space, Modal, notification,
   Button
 } from 'antd';
+import ModalCustomer from './ModalCustomer'
 import styles from './Customer.module.scss';
 import { openNotification } from './CustomerMini'
-import { getListCustomer,deleteCustomer } from '../api/customer'
-const originData = [];
+import { getListCustomer, deleteCustomer } from '../../api/customer'
 const { confirm } = Modal;
 
 export default function Customer() {
-  const [form] = Form.useForm();
   const [data, setData] = useState([]);
-  const [editingKey, setEditingKey] = useState('');
-  const [count, setCount] = useState(101);
-  const isEditing = (record) => record.key === editingKey;
+  const [visible, setVisible] = useState(false);
+
+  const toggle = () => {
+    setVisible(false);
+  };
 
   useEffect(() => {
     getListCustomer({ page: 1 })
       .then((res) => {
         setData(res.data)
-        console.log('data',res.data[0]);
+        console.log('data', res.data[0]);
       }
       )
   }, [])
@@ -40,47 +41,19 @@ export default function Customer() {
 
   const deleteData = (id) => {
     deleteCustomer(id)
-    console.log("id",id);
+    console.log("id", id);
     const finalDataDelete = data.filter((item) => item.id !== id);
     setData(finalDataDelete)
     openNotification('bottomLeft');
   };
 
-  const save = async (key) => {
-    try {
-      const row = await form.validateFields();
-      const newData = [...data];
-      const index = newData.findIndex((item) => key === item.key);
-
-      if (index > -1) {
-        const item = newData[index];
-        newData.splice(index, 1, { ...item, ...row });
-        setData(newData);
-        setEditingKey('');
-      } else {
-        newData.push(row);
-        setData(newData);
-        setEditingKey('');
-      }
-    } catch (errInfo) {
-      console.log('Validate Failed:', errInfo);
-    }
-  };
-  const handleAdd = () => {
-    const newData = {
-      key: count,
-      idCard: `00109901840${count}`,
-      idCustomer: `11213${count}`,
-      name: `Edrward ${count}`,
-      dateOfBirth: new Date(2018, 11, 24, 10, 33, 30, 0),
-      address: `London Park no. ${count}`,
-    };
-
-    originData.unshift(newData)
-    // console.log('data sau',originData);
-  };
   return (
     <div>
+      <Button type="primary" onClick={() => {
+        setVisible(true);
+      }}>Add</Button>
+      <br />
+      <br />
       <table className={styles.table}>
         <tr className={styles.tr}>
           <th className={styles.th} >Id Customer</th>
@@ -119,12 +92,11 @@ export default function Customer() {
                 </th>
               </tr>
             )
-
           }
-
           )
         }
       </table>
+      {visible == true && <ModalCustomer toggle={toggle} />}
     </div>
   )
 };

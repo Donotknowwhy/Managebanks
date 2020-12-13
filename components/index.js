@@ -4,7 +4,7 @@ import styles from './Index.module.scss';
 import reqwest from 'reqwest';
 import { AppleOutlined, AndroidOutlined } from '@ant-design/icons';
 import {getUser} from '../api/user';
-import Customer from '../components/Customer'
+import Customer from './Customer/Customer'
 
 const { Search } = Input;
 const { TabPane } = Tabs;

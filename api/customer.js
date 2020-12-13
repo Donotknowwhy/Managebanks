@@ -11,9 +11,9 @@ export function getListCustomer(params) {
   });
 }
 
-export function postContent(data) {
+export function postCustomer(data) {
   return request({
-    url: '/post-composite-service/api/v1/posts',
+    url: '/customer',
     method: 'post',
     data,
   });
