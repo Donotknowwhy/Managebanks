@@ -68,8 +68,6 @@ export default function Customer() {
             const ngaySinh = new Date(item.person.ngaySinh);
             const dateOfBird = ngaySinh.getDate() + ' tháng ' +
               ngaySinh.getMonth() + ', ' + ngaySinh.getFullYear()
-            const { address } = item.person;
-            const add = address.soNha + "," + address.phuongXa + "," + address.quanHuyen + "," + address.tinhThanhpho
             return (
               <tr
                 item={item}
@@ -84,19 +82,30 @@ export default function Customer() {
                 <th className={styles.th} >{item.person.email}</th>
                 <th className={styles.th}>
                   <Space>
-                    <Button type="primary" >Sửa</Button>
+                    <Button type="primary" onClick={() => {
+                      setVisible(true);
+                    }} >Sửa</Button>
                     <Button type="primary" onClick={() => {
                       showPromiseConfirm(item.id)
                     }}>Xóa</Button>
                   </Space>
                 </th>
+                {visible == true && <ModalCustomer
+                  updateData={item}
+                  title="Lưu"
+                  toggle={toggle} />}
               </tr>
+
             )
           }
+
           )
         }
+        {/* {visible == true && <ModalCustomer 
+        //  updateData={item}
+         title="Lưu"
+          toggle={toggle} />} */}
       </table>
-      {visible == true && <ModalCustomer toggle={toggle} />}
     </div>
   )
 };
