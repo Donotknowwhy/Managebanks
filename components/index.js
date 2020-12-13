@@ -5,7 +5,7 @@ import reqwest from 'reqwest';
 import { AppleOutlined, AndroidOutlined } from '@ant-design/icons';
 import {getUser} from '../api/user';
 import Customer from './Customer/Customer'
-
+import Employee from './Employee/Employee'
 const { Search } = Input;
 const { TabPane } = Tabs;
 
@@ -13,35 +13,7 @@ export default function PostComponent() {
 
   return (
     <>
-      <div >
-        <Row gutter={16}>
-          <Col xs={24} sm={24} lg={12} xl={6}>
-            <Card  bordered={false} className={styles.card}>
-              <h2>2064</h2>
-              <h4>Sessions</h4>
-            </Card>
-          </Col>
-          <Col xs={24} sm={24} lg={12} xl={6}>
-            <Card  bordered={false} className={styles.card}>
-              <h2>2064</h2>
-              <h4>Sessions</h4>
-            </Card>
-          </Col>
-          <Col xs={24} sm={24} lg={12} xl={6}>
-            <Card  bordered={false} className={styles.card}>
-              <h2>2064</h2>
-              <h4>Sessions</h4>
-            </Card>
-          </Col>
-          <Col xs={24} sm={24} lg={12} xl={6}>
-            <Card  bordered={false} className={styles.card}>
-              <h2>2064</h2>
-              <h4>Sessions</h4>
-            </Card>
-          </Col>
-        </Row>
-      </div>
-      <Tabs defaultActiveKey="2">
+      <Tabs defaultActiveKey="1">
     <TabPane
       tab={
         <span>
@@ -62,9 +34,9 @@ export default function PostComponent() {
       }
       key="2"
     >
-      Tab 2
+      <Employee/>
     </TabPane>
-  </Tabs>,
+  </Tabs>
       <br />
       <br />
     </>
