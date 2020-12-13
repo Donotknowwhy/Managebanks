@@ -11,6 +11,16 @@ export function getListCustomer(params) {
   });
 }
 
+export function getCustomerById(data) {
+  return request({
+    url: `/customer/idCustomer/${data}`,
+    method: 'get',
+    headers: {
+      'Content-type': 'application/json',
+    },
+  });
+}
+
 export function postCustomer(data) {
   return request({
     url: '/customer',

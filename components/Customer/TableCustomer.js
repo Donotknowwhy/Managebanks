@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Table, Input, InputNumber,
-  Popconfirm, Form, Space, Modal, notification,
+  Space, 
   Button
 } from 'antd';
-import ModalCustomer from './ModalCustomer'
 import ModalUpdateCustomer from './ModalUpdateCustomer'
-import styles from './Customer.module.scss';
-import { openNotification } from './CustomerMini'
-import { getListCustomer, deleteCustomer } from '../../api/customer'
-const { confirm } = Modal;
+
 
 export default function TableCustomer(props) {
   const [visibleUpdate, setVisibleUpdate] = useState(false);

@@ -9,11 +9,13 @@ import ModalUpdateCustomer from './ModalUpdateCustomer'
 import TableCustomer from './TableCustomer'
 import styles from './Customer.module.scss';
 import { openNotification } from './CustomerMini'
-import { getListCustomer, deleteCustomer } from '../../api/customer'
+import { getListCustomer, deleteCustomer,getCustomerById } from '../../api/customer'
 const { confirm } = Modal;
+const { Search } = Input;
 
 export default function Customer() {
   const [data, setData] = useState([]);
+  const [dataSearch, setDataSearch] = useState([]);
   const [visible, setVisible] = useState(false);
   const [visibleUpdate, setVisibleUpdate] = useState(false);
 
@@ -29,6 +31,7 @@ export default function Customer() {
     getListCustomer({ page: 0 })
       .then((res) => {
         setData(res.data)
+        setDataSearch(res.data)
       }
       )
   }, [])
@@ -36,6 +39,7 @@ export default function Customer() {
     getListCustomer({ page: 0 })
       .then((res) => {
         setData(res.data)
+        setDataSearch(res.data)
       }
       )
   }, [visible || visibleUpdate ])
@@ -59,12 +63,31 @@ export default function Customer() {
     setData(finalDataDelete)
     openNotification('bottomLeft');
   };
+  const onSearch = value => {
+    getCustomerById(value).then( (res)=>{
+      setData([res.data])
+    }).catch( (err)=>{
+      setData([])
+    } )
+  }
 
   return (
     <div>
       <Button type="primary" onClick={() => {
         setVisible(true);
       }}>Add</Button>
+       <Search
+      placeholder="search idCustomer"
+      allowClear
+      // onChange={ (e)=>{
+      //   console.log('search',e.target.value);
+      //   if(e.target.value == ""){
+      //     console.log("setDataSearch",dataSearch);
+      //   }
+      // }}
+      onSearch={onSearch}
+      style={{ width: 200, margin: '0 10px' }}
+    />
       <br />
       <br />
       <table className={styles.table}>
