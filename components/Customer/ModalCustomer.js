@@ -39,8 +39,8 @@ export default function ModalPost(props) {
                 },
                 ngaySinh,
                 idCustomer,
-                cardNumber
-            }
+            },
+            cardNumber
         }
         console.log('customer', customer);
         await postCustomer(customer).then( (res)=>{
