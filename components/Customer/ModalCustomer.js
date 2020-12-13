@@ -110,12 +110,13 @@ export default function ModalPost(props) {
                         <Input onChange={e => setEmail(e.target.value)} placeholder="Email" />
                     </Form.Item>
 
-                    <Form.Item name={['customer', 'cardNumber']} rules={[{ type: 'number' }]}>
-                        <InputNumber onChange={e => setCardNumber(e)} placeholder="Số chứng minh thư" style={{ width: 470 }} />
-                    </Form.Item>
-                    <Form.Item name={['customer', 'idCustomer']} rules={[{ type: 'number' }]}>
-                        <InputNumber onChange={e => setIdCustomer(e)} placeholder="Mã khách hàng" style={{ width: 470 }} />
-                    </Form.Item>
+                    < Input placeholder="Số chứng minh thư"
+                    onChange={e => setCardNumber(e.target.value)} />
+                <br />
+                <br />
+                <Input onChange={e => setIdCustomer(e.target.value)}  placeholder="Mã khách hàng" />
+                <br />
+                <br />
                     Ngày sinh : <DatePicker onChange={(date, dateString) => setNgaySinh(dateString)}
                     />
                     <br />

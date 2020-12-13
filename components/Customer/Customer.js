@@ -5,6 +5,8 @@ import {
   Button
 } from 'antd';
 import ModalCustomer from './ModalCustomer'
+import ModalUpdateCustomer from './ModalUpdateCustomer'
+import TableCustomer from './TableCustomer'
 import styles from './Customer.module.scss';
 import { openNotification } from './CustomerMini'
 import { getListCustomer, deleteCustomer } from '../../api/customer'
@@ -13,19 +15,31 @@ const { confirm } = Modal;
 export default function Customer() {
   const [data, setData] = useState([]);
   const [visible, setVisible] = useState(false);
+  const [visibleUpdate, setVisibleUpdate] = useState(false);
 
   const toggle = () => {
     setVisible(false);
   };
 
+  const toggleUpdate = () => {
+    setVisibleUpdate(!visibleUpdate);
+  };
+
   useEffect(() => {
-    getListCustomer({ page: 1 })
+    getListCustomer({ page: 0 })
       .then((res) => {
         setData(res.data)
-        console.log('data', res.data[0]);
       }
       )
   }, [])
+  useEffect(() => {
+    getListCustomer({ page: 0 })
+      .then((res) => {
+        setData(res.data)
+      }
+      )
+  }, [visible || visibleUpdate ])
+
   const showPromiseConfirm = async (id) => {
     confirm({
       title: 'Xóa bài viết?',
@@ -41,7 +55,6 @@ export default function Customer() {
 
   const deleteData = (id) => {
     deleteCustomer(id)
-    console.log("id", id);
     const finalDataDelete = data.filter((item) => item.id !== id);
     setData(finalDataDelete)
     openNotification('bottomLeft');
@@ -70,42 +83,34 @@ export default function Customer() {
               ngaySinh.getMonth() + ', ' + ngaySinh.getFullYear()
             return (
               <tr
-                item={item}
                 key={item.id}
               >
                 <th className={styles.th} >{item.idCustomer}</th>
                 <th className={styles.th} >{item.person.cardNumber}</th>
                 <th className={styles.th} >{item.person.fullName.ho + " " +
-                  item.person.fullName.ten + " " +
-                  item.person.fullName.tenDem}</th>
+                  item.person.fullName.tenDem + " " +
+                  item.person.fullName.ten}</th>
                 <th className={styles.th} > {dateOfBird} </th>
                 <th className={styles.th} >{item.person.email}</th>
                 <th className={styles.th}>
                   <Space>
-                    <Button type="primary" onClick={() => {
-                      setVisible(true);
-                    }} >Sửa</Button>
+                    <TableCustomer
+                      item={item}
+                      toggleUpdate={toggleUpdate}
+                    />
                     <Button type="primary" onClick={() => {
                       showPromiseConfirm(item.id)
                     }}>Xóa</Button>
                   </Space>
                 </th>
-                {visible == true && <ModalCustomer
-                  updateData={item}
-                  title="Lưu"
-                  toggle={toggle} />}
               </tr>
-
             )
           }
-
           )
         }
-        {/* {visible == true && <ModalCustomer 
-        //  updateData={item}
-         title="Lưu"
-          toggle={toggle} />} */}
       </table>
+      {visible == true && <ModalCustomer
+        toggle={toggle} />}
     </div>
   )
 };

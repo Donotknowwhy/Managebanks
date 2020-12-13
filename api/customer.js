@@ -19,9 +19,9 @@ export function postCustomer(data) {
   });
 }
 
-export function putContent(data) {
+export function putCustomer(data) {
   return request({
-    url: '/post-composite-service/api/v1/posts',
+    url: '/customer',
     method: 'put',
     data,
   });
@@ -31,14 +31,6 @@ export function deleteCustomer(data) {
   return request({
     url: `/customer/${data}`,
     method: 'delete',
-  });
-}
-
-export function getPreSign(params) {
-  return request({
-    url: '/image-service/api/images/presigned_url',
-    method: 'get',
-    params,
   });
 }
 
