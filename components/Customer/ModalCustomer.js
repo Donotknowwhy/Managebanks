@@ -11,7 +11,7 @@ export default function ModalPost(props) {
     const [tenDem, setTenDem] = useState('')
     const [ten, setTen] = useState('')
     const [email, setEmail] = useState('')
-    const [idCustomer,setIdCustomer] =useState('')
+    const [idCustomer, setIdCustomer] = useState('')
     const [cardNumber, setCardNumber] = useState('')
     const [ngaySinh, setNgaySinh] = useState('')
     const [soNha, setSoNha] = useState('')
@@ -43,10 +43,10 @@ export default function ModalPost(props) {
             idCustomer
         }
         console.log('customer', customer);
-        await postCustomer(customer).then( (res)=>{
-            console.log("thành công",res.data);
-        }).catch( res=>{
-            console.log("lỗi",res.data);
+        await postCustomer(customer).then((res) => {
+            console.log("thành công", res.data);
+        }).catch(res => {
+            console.log("lỗi", res.data);
         })
         props.toggle();
         setVisible(false);
@@ -55,8 +55,25 @@ export default function ModalPost(props) {
         setVisible(false);
         props.toggle();
     };
+    useEffect(() => {   
+        if (props.updateData) {
+            const {person} = props.updateData
+            setHo(person.fullName.ho) ;
+            setTen(person.fullName.ten) ;
+            setTenDem(person.fullName.tenDem)
+            setEmail(person.email)
+            setIdCustomer(props.updateData.idCustomer)
+            setCardNumber(person.cardNumber)
+            setNgaySinh(person.ngaySinh)
+            setSoNha(person.address.soNha)
+            setPhuongXa(person.address.phuongXa)
+            setQuanHuyen(person.address.quanHuyen)
+            setTinhThanhpho(person.address.tinhThanhpho)
+           
+        }
+        console.log('prop.data',props.updateData);
+      }, [props.updateData]);
     return (
-        <>
             <Modal
                 visible={visible}
                 onOk={handleOk}
@@ -66,12 +83,11 @@ export default function ModalPost(props) {
                 footer={[
                     <Button key="submit" block type="primary"
                         onClick={handleOk}
-                    disabled={ho && tenDem && ten && email &&
-                         ngaySinh && cardNumber && idCustomer &&
-                        soNha  && phuongXa && quanHuyen && tinhThanhpho ? false : true}
+                        disabled={ho && tenDem && ten && email &&
+                            ngaySinh && cardNumber && idCustomer &&
+                            soNha && phuongXa && quanHuyen && tinhThanhpho ? false : true}
                     >
-                       
-                        {props.savePost ? props.savePost : 'Đăng'}
+                        {props.title ? props.title : 'Đăng'}
                     </Button>
                 ]}
             >
@@ -79,26 +95,17 @@ export default function ModalPost(props) {
                 <Form>
                     <Row justify="space-between">
                         <Col span={7}>
-                            {/* <Input onChange={e => setHo(e.target.value)} placeholder="Họ" /> */}
-                            <Form.Item name={['customer', 'Họ']} rules={[{ required: true }]}>
-                                <Input onChange={e => setHo(e.target.value)} placeholder="Họ" />
-                            </Form.Item>
+                                <Input value={ho} onChange={e => setHo(e.target.value)}
+                                 placeholder="Họ" />
                         </Col>
                         <Col span={7}>
-                            <Form.Item name={['customer', 'Tên đệm']} rules={[{ required: true }]}>
-                                <Input onChange={e => setTenDem(e.target.value)} placeholder="Tên đệm" />
-                            </Form.Item>
-                            {/* <Input onChange={e => setTenDem(e.target.value)} placeholder="Tên đệm" /> */}
+                                <Input value={tenDem} onChange={e => setTenDem(e.target.value)} placeholder="Tên đệm" />
                         </Col>
                         <Col span={7}>
-                            {/* <Input onChange={e => setTen(e.target.value)} placeholder="Tên" /> */}
-                            <Form.Item name={['customer', 'Tên']} rules={[{ required: true }]}>
-                                <Input onChange={e => setTen(e.target.value)} placeholder="Tên" />
-                            </Form.Item>
+                                <Input value={ten} onChange={e => setTen(e.target.value)} placeholder="Tên" />
                         </Col>
                     </Row>
-
-                    {/* <Input onChange={e => setEmail(e.target.value)} placeholder="Email" /> */}
+                    <br/>
                     <Form.Item name={['customer', 'email']} rules={[{ type: 'email' }]}>
                         <Input onChange={e => setEmail(e.target.value)} placeholder="Email" />
                     </Form.Item>
@@ -109,34 +116,33 @@ export default function ModalPost(props) {
                     <Form.Item name={['customer', 'idCustomer']} rules={[{ type: 'number' }]}>
                         <InputNumber onChange={e => setIdCustomer(e)} placeholder="Mã khách hàng" style={{ width: 470 }} />
                     </Form.Item>
-                    {/* <Input onChange={e => setPhoneNumber(e.target.value)} placeholder="Số điện thoại" /> */}
-
                     Ngày sinh : <DatePicker onChange={(date, dateString) => setNgaySinh(dateString)}
                     />
                     <br />
                     <br />
                     <Row justify="space-between">
                         <Col span={11}>
-                            <Input onChange={e => setSoNha(e.target.value)} placeholder="Số nhà" />
+                            <Input value={soNha} placeholder="Số nhà"
+                            onChange={e => setSoNha(e.target.value)}  />
                         </Col>
                         <Col span={11}>
-                            <Input onChange={e => setPhuongXa(e.target.value)} placeholder="Phường/Xã" />
+                            <Input value={phuongXa} placeholder="Phường/Xã" 
+                             onChange={e => setPhuongXa(e.target.value)} />
                         </Col>
-
                     </Row>
                     <br />
                     <Row justify="space-between">
                         <Col span={11}>
-                            <Input onChange={e => setQuanHuyen(e.target.value)} placeholder="Quận/Huyện" />
+                            <Input value={quanHuyen} placeholder="Quận/Huyện"
+                            onChange={e => setQuanHuyen(e.target.value)}  />
                         </Col>
                         <Col span={11}>
-                            <Input onChange={e => setTinhThanhpho(e.target.value)} placeholder="Tỉnh/Thành phố" />
+                            <Input value={tinhThanhpho} placeholder="Tỉnh/Thành phố"
+                            onChange={e => setTinhThanhpho(e.target.value)}  />
                         </Col>
-
                     </Row>
                 </Form>
             </Modal >
-        </>
     )
 }
 
