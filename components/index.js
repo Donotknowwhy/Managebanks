@@ -2,7 +2,7 @@ import { Row, Col, Table, Button, Space, Input,Tabs, Card } from 'antd';
 import { useState, useEffect } from 'react';
 import styles from './Index.module.scss';
 import reqwest from 'reqwest';
-import { AppleOutlined, AndroidOutlined } from '@ant-design/icons';
+import { AppleOutlined, AndroidOutlined ,UserOutlined, UserSwitchOutlined } from '@ant-design/icons';
 import {getUser} from '../api/user';
 import Customer from './Customer/Customer'
 import Employee from './Employee/Employee'
@@ -13,12 +13,12 @@ export default function PostComponent() {
 
   return (
     <>
-      <Tabs defaultActiveKey="1">
+      <Tabs defaultActiveKey="2">
     <TabPane
       tab={
         <span>
-          <AppleOutlined />
-          Tab 1
+          <UserOutlined />
+          Khách hàng
         </span>
       }
       key="1"
@@ -28,8 +28,8 @@ export default function PostComponent() {
     <TabPane
       tab={
         <span>
-          <AndroidOutlined />
-          Tab 2
+          <UserSwitchOutlined />
+          Nhân Viên
         </span>
       }
       key="2"

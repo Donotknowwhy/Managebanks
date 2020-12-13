@@ -25,3 +25,21 @@ export function deleteEmployee(data){
         method: 'delete',
       });
 }
+
+export function putEmployee(data) {
+    return request({
+      url: '/employee',
+      method: 'put',
+      data,
+    });
+  }
+
+  export function getEmployeeById(data) {
+    return request({
+      url: `/employee/id-employee/${data}`,
+      method: 'get',
+      headers: {
+        'Content-type': 'application/json',
+      },
+    });
+  }

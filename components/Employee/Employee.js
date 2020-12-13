@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import {
   Table, Input, InputNumber,
   Popconfirm, Form, Space, Modal, notification,
-  Button
+  Button, Row, Col
 } from 'antd';
-import  {getEmployee, postEmployee, deleteEmployee} from '../../api/employee'
+import  {getEmployee, postEmployee, deleteEmployee, getEmployeeById} from '../../api/employee'
 import ModalEmployee from './ModalEmployee'
 import styles from './Employee.module.scss'
 import { openNotification } from './EmployeeMini';
+import ModalUpdateEmployee from './ModalUpdateEmployee'
+import TableEmployee from './TableEmployee'
 const { confirm } = Modal;
 const { Search } = Input;
 
@@ -18,10 +20,15 @@ export default function Employee(){
   const [data, setData] = useState([]);
   const [visible, setVisible] = useState(false);
   const [value,setValue] = useState('');
+  const [visibleUpdate, setVisibleUpdate] = useState(false);
 
   const toggle = () => {
     setVisible(false);
   }
+
+  const toggleUpdate = () => {
+    setVisibleUpdate(!visibleUpdate);
+  };
 
   useEffect(() =>{
     getEmployee({page: 0}).then((res) => {
@@ -30,12 +37,13 @@ export default function Employee(){
     })
   },[])
 
+
   useEffect(() => {  
       getEmployee({ page: 0 }).then((res) => {   
         setData(res.data)     
         }    
             )  
-    }, [visible])
+    }, [visible || visibleUpdate ])
 
   const showPromiseConfirm = async (id) => {
     confirm({
@@ -57,26 +65,33 @@ export default function Employee(){
     openNotification('bottomLeft');
   }
 
-  const onSearch = () => {
-    console.log(value)
+  const onSearch = value => {
+    getEmployeeById(value).then( (res)=>{
+      setData([res.data])
+    }).catch( (err)=>{
+      setData([])
+    } )
   }
   
   return(
     <div>
-    {/* <Search
+    <Row >
+      <Col span={10} >
+      <Search
       placeholder="Search id Employee"
       allowClear
       enterButton="Search"
       size="large"
       onSearch={onSearch}
-      onChange={e => setValue(e)}
+      
     />
-    <br/>
-    <br/> */}
+      </Col>
+      <Col span={2} offset={12}>
       <Button type="primary" onClick={() => {
         setVisible(true);
-      }}>Add</Button>
-      <br />
+      }}>Add new employee</Button>
+      </Col>
+    </Row>   
       <br />
       <table className={styles.table}>
         <tr className={styles.tr}>
@@ -107,7 +122,10 @@ export default function Employee(){
                 <th className={styles.th}>{item.person.email}</th>
                 <th className={styles.th}>
                 <Space>
-                  <Button type="primary">Sửa</Button>
+                <TableEmployee
+                      item={item}
+                      toggleUpdate={toggleUpdate}
+                    />
                   <Button type="primary" onClick={() => {
                     showPromiseConfirm(item.id)
                   }}>Xóa</Button>

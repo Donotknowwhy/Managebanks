@@ -108,13 +108,14 @@ export default function ModalPost(props) {
                     <Form.Item name={['employee', 'email']} rules={[{ type: 'email' }]}>
                         <Input onChange={e => setEmail(e.target.value)} placeholder="Email" />
                     </Form.Item>
-
-                    <Form.Item name={['employee', 'cardNumber']} rules={[{ type: 'number' }]}>
-                        <InputNumber onChange={e => setCardNumber(e)} placeholder="Số chứng minh thư" style={{ width: 470 }} />
-                    </Form.Item>
-                    <Form.Item name={['employee', 'idEmployee']} rules={[{ type: 'number' }]}>
-                        <InputNumber onChange={e => setIdEmployee(e)} placeholder="Mã nhân viên" style={{ width: 470 }} />
-                    </Form.Item>
+                    
+                    <Input onChange={e => setCardNumber(e.target.value)} placeholder="Số chứng minh thư" style={{ width: 470 }} />
+                    <br/>
+                    <br/>
+                   
+                    <Input onChange={e => setIdEmployee(e.target.value)} placeholder="Mã nhân viên" style={{ width: 470 }} />
+                    <br/>
+                    <br/>
                     <Form.Item name={['employee', 'idLevel']} rules={[{ type: 'number' }]}>
                         <InputNumber onChange={e => setIdLevel(e)} placeholder="Cấp bậc" style={{ width: 470 }} />
                     </Form.Item>
