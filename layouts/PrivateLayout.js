@@ -1,4 +1,4 @@
-import {Layout, Space, Affix} from 'antd';
+import {Layout, Space, Affix, Row} from 'antd';
 import {useRouter} from 'next/router';
 import {useEffect} from 'react';
 import Navigation from '../components/Navigation';
@@ -21,14 +21,15 @@ function PrivateLayout(props) {
   if (!user) {
     return (
       <div>
+      <Row justify='center'>
         <LoadingOutlined />
+      </Row>
       </div>
     );
   }
   return (
     <>
       <Layout >
-        <Space size={50} direction="vertical">
           <Affix>
             <Header className={styles.formHeader}>
               <Navigation />
@@ -37,7 +38,6 @@ function PrivateLayout(props) {
           <Layout>
             {props.children}
           </Layout>
-        </Space>
         <Footer style={{textAlign: 'center'}}>
           Design by 105C7
         </Footer>
