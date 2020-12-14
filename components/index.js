@@ -46,7 +46,7 @@ export default function PostComponent() {
       tab={
         <span>
           <AppleOutlined />
-          Tab 1
+          Customer
         </span>
       }
       key="1"

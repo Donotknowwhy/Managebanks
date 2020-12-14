@@ -31,6 +31,7 @@ export default function Customer() {
     getListCustomer({ page: 0 })
       .then((res) => {
         setData(res.data)
+        console.log("data",res.data);
         setDataSearch(res.data)
       }
       )
