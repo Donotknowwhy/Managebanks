@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   Table, Input, InputNumber,
   Popconfirm, Form, Space, Modal, notification,
-  Button
+  Button, Row, Col
 } from 'antd';
 import ModalCustomer from './ModalCustomer'
 import ModalUpdateCustomer from './ModalUpdateCustomer'
@@ -10,6 +10,7 @@ import TableCustomer from './TableCustomer'
 import styles from './Customer.module.scss';
 import { openNotification } from './CustomerMini'
 import { getListCustomer, deleteCustomer } from '../../api/customer'
+const { Search } = Input;
 const { confirm } = Modal;
 
 export default function Customer() {
@@ -60,12 +61,33 @@ export default function Customer() {
     openNotification('bottomLeft');
   };
 
+
+  const onSearch = value => {
+    getCustomerById(value).then( (res)=>{
+      setData([res.data])
+    }).catch( (err)=>{
+      setData([])
+    } )
+  }  
   return (
     <div>
+      <Row >
+      <Col span={10} >
+      <Search
+      placeholder="Search id Customer"
+      allowClear
+      enterButton="Search"
+      size="large"
+      onSearch={onSearch}
+      
+    />
+      </Col>
+      <Col span={2} offset={12}>
       <Button type="primary" onClick={() => {
         setVisible(true);
-      }}>Add</Button>
-      <br />
+      }}>Add customer</Button>
+      </Col>
+    </Row>   
       <br />
       <table className={styles.table}>
         <tr className={styles.tr}>

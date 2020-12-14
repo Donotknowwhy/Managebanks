@@ -89,7 +89,7 @@ export default function Employee(){
       <Col span={2} offset={12}>
       <Button type="primary" onClick={() => {
         setVisible(true);
-      }}>Add new employee</Button>
+      }}>Add employee</Button>
       </Col>
     </Row>   
       <br />
