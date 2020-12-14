@@ -9,7 +9,7 @@ import ModalUpdateCustomer from './ModalUpdateCustomer'
 import TableCustomer from './TableCustomer'
 import styles from './Customer.module.scss';
 import { openNotification } from './CustomerMini'
-import { getListCustomer, deleteCustomer } from '../../api/customer'
+import { getListCustomer, deleteCustomer, getCustomerById } from '../../api/customer'
 const { Search } = Input;
 const { confirm } = Modal;
 
