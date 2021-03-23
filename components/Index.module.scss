@@ -1,5 +1,17 @@
-.card {
-    margin-top: 15px;
-    background-color: #009efb;
+.content{
+    padding: 0px 30px;
+    .time{
+        padding-bottom: 10px;
+        font-size: 18px;
+        color: #800000;
+    }
+    .notify{
+        line-height: 20px;
+        letter-spacing: 1px;
+        color: #800000;
+        span{
+            font-size: 18px;
+            font-weight: bold;
+        }
+    }
 }
-

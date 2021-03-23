@@ -16,33 +16,9 @@ const { TabPane } = Tabs;
 
 export default function PostComponent() {
   return (
-    <>
-      <Tabs defaultActiveKey="2">
-        <TabPane
-          tab={
-            <span>
-              <UserOutlined />
-              Khách hàng
-            </span>
-          }
-          key="1"
-        >
-          <Customer />
-        </TabPane>
-        <TabPane
-          tab={
-            <span>
-              <UserSwitchOutlined />
-              Nhân Viên
-            </span>
-          }
-          key="2"
-        >
-          <Employee />
-        </TabPane>
-      </Tabs>
-      <br />
-      <br />
-    </>
+    <div className={styles.content}>
+      <div className={styles.time}>Ngày 18/03/2021 :</div>
+      <div className={styles.notify}><span>THÔNG BÁO</span> V/v: Hướng dẫn đăng ký chuyên ngành trên hệ thống qldt.ptit.edu.vn cho sinh viên khóa 2018 các ngành: Quản trị kinh doanh; Công nghệ thông tin; MarketingTin tức mới cập nhật (18/03/2021)</div>
+    </div>
   );
 }
