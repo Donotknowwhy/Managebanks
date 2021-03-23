@@ -1,12 +1,7 @@
-import Head from 'next/head'
-import styles from './index.module.scss';
+import { Layout, Menu } from 'antd';
+import Index from '../components/index';
 import PrivateLayout from '../layouts/PrivateLayout';
-import { Layout, Menu, Breadcrumb,Space } from 'antd';
-import SideBar from "../components/SideBar"
-import Index from '../components/index'
-import SearchIndex from '../components/SearchIndex'
-import Customer from '../components/Customer/Customer'
-import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
+import styles from './index.module.scss';
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
@@ -15,7 +10,6 @@ export default function Home() {
     <PrivateLayout>
         <Content className={styles.content}  >
           <Index />
-          {/* <Customer/> */}
         </Content>
     </PrivateLayout>
   )

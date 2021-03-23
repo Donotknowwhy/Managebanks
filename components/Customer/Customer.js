@@ -26,20 +26,20 @@ export default function Customer() {
     setVisibleUpdate(!visibleUpdate);
   };
 
-  useEffect(() => {
-    getListCustomer({ page: 0 })
-      .then((res) => {
-        setData(res.data)
-      }
-      )
-  }, [])
-  useEffect(() => {
-    getListCustomer({ page: 0 })
-      .then((res) => {
-        setData(res.data)
-      }
-      )
-  }, [visible || visibleUpdate ])
+  // useEffect(() => {
+  //   getListCustomer({ page: 0 })
+  //     .then((res) => {
+  //       setData(res.data)
+  //     }
+  //     )
+  // }, [])
+  // useEffect(() => {
+  //   getListCustomer({ page: 0 })
+  //     .then((res) => {
+  //       setData(res.data)
+  //     }
+  //     )
+  // }, [visible || visibleUpdate ])
 
   const showPromiseConfirm = async (id) => {
     confirm({

@@ -30,20 +30,20 @@ export default function Employee(){
     setVisibleUpdate(!visibleUpdate);
   };
 
-  useEffect(() =>{
-    getEmployee({page: 0}).then((res) => {
-      setData(res.data)
-      console.log(res.data)
-    })
-  },[])
+  // useEffect(() =>{
+  //   getEmployee({page: 0}).then((res) => {
+  //     setData(res.data)
+  //     console.log(res.data)
+  //   })
+  // },[])
 
 
-  useEffect(() => {  
-      getEmployee({ page: 0 }).then((res) => {   
-        setData(res.data)     
-        }    
-            )  
-    }, [visible || visibleUpdate ])
+  // useEffect(() => {  
+  //     getEmployee({ page: 0 }).then((res) => {   
+  //       setData(res.data)     
+  //       }    
+  //           )  
+  //   }, [visible || visibleUpdate ])
 
   const showPromiseConfirm = async (id) => {
     confirm({
