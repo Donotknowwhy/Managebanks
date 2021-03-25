@@ -37,10 +37,25 @@ export default function PostComponent() {
             </tr>
           </thead>
           <tbody>
+            <tr className={styles.td}>
+              <td>0001</td>
+              <td>03</td>
+              <td>03</td>
+              <td>03</td>
+              <td>B17dccn594</td>
+              <td>thứ 6</td>
+              <td>tiết 4</td>
+              <td>tuần 3</td>
+            </tr>
             <tr>
-              <td>Alfreds Futterkiste</td>
-              <td>Maria Anders</td>
-              <td>Germany</td>
+              <td>0001</td>
+              <td>03</td>
+              <td>03</td>
+              <td>03</td>
+              <td>B17dccn594</td>
+              <td>thứ 6</td>
+              <td>tiết 4</td>
+              <td>tuần 3</td>
             </tr>
           </tbody>
         </table>

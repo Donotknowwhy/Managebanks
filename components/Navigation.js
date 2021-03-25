@@ -8,7 +8,6 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useUser } from "../utils/use-user";
 import styles from "./Navigation.module.scss";
-import SideBar from './SideBar'
 
 const { SubMenu } = Menu;
 
