@@ -8,6 +8,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useUser } from "../utils/use-user";
 import styles from "./Navigation.module.scss";
+import SideBar from './SideBar'
 
 const { SubMenu } = Menu;
 
@@ -40,10 +41,15 @@ export default function Navigation() {
       <p></p>
       <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
         <Menu.Item key="item1" className={styles.menuItem}>
-          Trang chủ
+        <Link href="/">
+          <a> Trang chủ</a>
+        </Link>
+         
         </Menu.Item>
         <Menu.Item key="item2" className={styles.menuItem} >
-          Đăng ký môn học
+        <Link href="/courseRegister">
+          <a> Đăng ký môn học</a>
+        </Link>
         </Menu.Item>
         <Menu.Item key="item3" className={styles.menuItem} >
           Xem thời khóa biểu

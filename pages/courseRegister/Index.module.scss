@@ -1,0 +1,28 @@
+.content{
+    margin: 30px 50px;
+    padding: 30px 40px;
+    background-color: #ffffff;
+    .listSubject{
+        display: flex;
+        .title{
+            font-size: 20px;
+        }
+        .tableSubject{
+            margin-left: 40px;
+            padding-bottom: 40px;
+            border: 1px solid #cecece;
+            .subject{
+                margin: 0px;
+                padding: 2px 60px 2px 10px;
+            }
+            .subject:hover{
+                background-color: #cecece;
+            }
+        }
+    }
+}
+
+.table{
+    margin-top: 50px;
+    width: 100%;
+}
