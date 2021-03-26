@@ -30,11 +30,11 @@ function PrivateLayout(props) {
   return (
     <>
       <Layout >
-          <Affix>
+          {/* <Affix> */}
             <Header className={styles.formHeader}>
               <Navigation />
             </Header>
-          </Affix>
+          {/* </Affix> */}
           <Layout>
             {props.children}
           </Layout>

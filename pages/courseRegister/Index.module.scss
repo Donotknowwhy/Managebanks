@@ -1,34 +1,56 @@
-.content{
-    margin: 30px 50px;
-    padding: 30px 40px;
-    background-color: #ffffff;
-    .listSubject{
-        display: flex;
-        .title{
-            font-size: 20px;
-        }
-        .tableSubject{
-            margin-left: 40px;
-            padding-bottom: 40px;
-            border: 1px solid #cecece;
-            .subject{
-                margin: 0px;
-                padding: 2px 60px 2px 10px;
-            }
-            .subject:hover{
-                background-color: #cecece;
-            }
-        }
+.content {
+  margin: 30px 50px;
+  padding: 30px 40px;
+  background-color: #ffffff;
+  .listSubject {
+    display: flex;
+    .title {
+      font-size: 20px;
     }
+    .tableSubject {
+      margin-left: 40px;
+      padding-bottom: 40px;
+      border: 1px solid #cecece;
+      .subject {
+        margin: 0px;
+        padding: 2px 60px 2px 10px;
+      }
+      .subject:hover {
+        background-color: #cecece;
+      }
+    }
+  }
 }
 
-.table{
-    margin-top: 50px;
+.title{
+    font-weight: bold;
+    font-size: 20px;
+    padding-top:30px;
+}
+.listRoom {
+  margin-top: 30px;
+  width: 100%;
+  height: 500px;
+  border-collapse: collapse;
+  border: 1px solid black;
+  table {
     width: 100%;
-   height: 500px;
-   border-collapse: collapse;
-   .td{
-        padding: 10px  0px;
-        border: 1px solid black;
+  }
+  tr {
+    height: 30px;
+    border: 1px solid #c7c7c7;
+    td,
+    th {
+      padding: 10px 10px;
     }
+  }
+  tbody tr:hover {
+    background-color: #cecece;
+  }
+  thead tr {
+    background-color: #2d8ece;
+  }
+}
+
+.tableRegister {
 }
