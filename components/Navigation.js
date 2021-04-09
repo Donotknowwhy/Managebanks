@@ -34,8 +34,9 @@ export default function Navigation() {
     <div className={styles.menu}>
       <Link href="/" >
         <a className={styles.logo}>
-          <Image width={40} preview={false} src="images/logo.jpg" />
+          <Image width={40} preview={false} src="images/logo.jpg" alt="PTIT" />
         </a>
+        {/* <span>PTIT</span> */}
       </Link>
       <p></p>
       <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
@@ -69,6 +70,7 @@ export default function Navigation() {
             size={40}
             src={user ? user.photoURL : ""}
             className={styles.avatarNavbar}
+            alt="Avatar"
           />
           <DownOutlined className={styles.iconExit}/>
         </Space>

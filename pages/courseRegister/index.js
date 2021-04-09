@@ -58,7 +58,7 @@ export default function PostComponent() {
           </table>
         </div>
 
-          <p className={styles.title}>Danh sách môn học đã đăng ký</p>
+          <p className={styles.titleRegister}>Danh sách môn học đã đăng ký</p>
         <div className={styles.listRoom}>
           <div className={styles.tableRegister}>
           <table>

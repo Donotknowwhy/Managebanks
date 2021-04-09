@@ -1,5 +1,6 @@
 import {Layout, Space, Affix, Row} from 'antd';
 import {useRouter} from 'next/router';
+import {NextSeo} from 'next-seo';
 import {useEffect} from 'react';
 import Navigation from '../components/Navigation';
 import {getAccessToken} from '../utils/cookies';
@@ -29,12 +30,14 @@ function PrivateLayout(props) {
   }
   return (
     <>
+    <NextSeo
+        title="Cổng thông tin đào tạo PTIT"
+        description="mô tả trang chủ"
+      />
       <Layout >
-          {/* <Affix> */}
             <Header className={styles.formHeader}>
               <Navigation />
             </Header>
-          {/* </Affix> */}
           <Layout>
             {props.children}
           </Layout>
