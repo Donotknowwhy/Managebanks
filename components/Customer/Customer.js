@@ -90,6 +90,7 @@ export default function Customer() {
     </Row>   
       <br />
       <table className={styles.table}>
+        <thead>
         <tr className={styles.tr}>
           <th className={styles.th} >Id Customer</th>
           <th className={styles.th} >Card Number</th>
@@ -98,6 +99,8 @@ export default function Customer() {
           <th className={styles.th} >Email</th>
           <th className={styles.th} >Action</th>
         </tr>
+        </thead>
+        <tbody>
         {
           data.map((item) => {
             const ngaySinh = new Date(item.person.ngaySinh);
@@ -130,6 +133,7 @@ export default function Customer() {
           }
           )
         }
+        </tbody>
       </table>
       {visible == true && <ModalCustomer
         toggle={toggle} />}

@@ -2,7 +2,7 @@ import request from '../utils/request';
 
 export function getListCustomer(params) {
   return request({
-    url: '/customer',
+    url: '/customer/get_all',
     method: 'get',
     params,
     headers: {

@@ -13,7 +13,7 @@ export default function PostComponent() {
 
   return (
     <>
-      <Tabs defaultActiveKey="2">
+      <Tabs defaultActiveKey="1">
     <TabPane
       tab={
         <span>
