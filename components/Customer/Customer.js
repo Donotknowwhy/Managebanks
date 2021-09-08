@@ -30,6 +30,7 @@ export default function Customer() {
     getListCustomer({ page: 0 })
       .then((res) => {
         setData(res.data)
+        console.log("customer",res.data);
       }
       )
   }, [])

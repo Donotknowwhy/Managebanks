@@ -2,7 +2,7 @@ import request from '../utils/request';
 
 export function getListCustomer(params) {
   return request({
-    url: '/customer/get_all',
+    url: '/customers',
     method: 'get',
     params,
     headers: {
@@ -13,7 +13,7 @@ export function getListCustomer(params) {
 
 export function getCustomerById(data) {
   return request({
-    url: `/customer/idCustomer/${data}`,
+    url: `/customers/idCustomer/${data}`,
     method: 'get',
     headers: {
       'Content-type': 'application/json',
@@ -23,7 +23,7 @@ export function getCustomerById(data) {
 
 export function postCustomer(data) {
   return request({
-    url: '/customer',
+    url: '/customers',
     method: 'post',
     data,
   });
@@ -31,7 +31,7 @@ export function postCustomer(data) {
 
 export function putCustomer(data) {
   return request({
-    url: '/customer',
+    url: '/customers',
     method: 'put',
     data,
   });
@@ -39,7 +39,7 @@ export function putCustomer(data) {
 
 export function deleteCustomer(data) {
   return request({
-    url: `/customer/${data}`,
+    url: `/customers/${data}`,
     method: 'delete',
   });
 }
